@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Animation avec tireggs</title>
+    <!-- Inclure le fichier du plugin -->
+    <script src="tireggs-min.js"></script>
+</head>
+<style>
+   .user_level_icon {
+  padding: 5px 10px;
+  border: 2px solid #ffc107;
+  background-color: #000;
+  color: #ffc107;
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border-radius: 50px;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.user_level_icon:hover {
+  background-color: #ffc107;
+  color: #000;
+  box-shadow: none;
+}
+
+</style>
+<body>
+    <button class="user_level_icon"  >Cliquez ici</button>
+    <div class="body">
+        
+
+        
+    </div>
+    
+
+    <script>
+        // Utilisation de tireggs-min.js
+        document.addEventListener('DOMContentLoaded', function() {
+            window.tireggs({
+                'image': {
+                    'url': 'zenis.gif', // URL de l'image
+                    'width': '20%', // Largeur de l'image (soit en px ou %)
+                    'height': '35%' // Hauteur de l'image (soit en px ou %)
+                },
+                'trigger': {
+                    'selector': '.user_level_icon', // Sélecteur de l'élément déclencheur
+                    'event': 'click' // Événement déclencheur (click ou sinon hover)
+                },
+                'position': {
+                    'div': '.body', // Sélecteur de l'élément parent
+                    'at': 'center center' // Position de l'image par rapport à l'élément déclencheur
+                },
+                'apparition': {
+                    'type': 'fade', // Effet d'animation (fade ou none)
+                    'duration': 1000 // Durée de l'animation (en ms)
+                },
+                'animation': {
+                    'type': 'move', // Effet d'animation (move ou fixed)
+                    'direction': 'rightleft' // choix pour la direction rightleft, leftright, bottomtop, topbottom
+                }
+            });
+        });
+    </script>
+</body>
+</html>
