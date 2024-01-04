@@ -66,11 +66,11 @@
                 img.style[property] = startValue;
 
                 setTimeout(function() {
-                    img.style.transition = `${property} 2s linear`;
+                    img.style.transition = `${property} 4s linear`;
                     img.style[property] = '50%';
 
                     setTimeout(function() {
-                        img.style.transition = `${property} 9s linear`;
+                        img.style.transition = `${property} 7s linear`;
                         img.style[property] = endValue;
 
                         setTimeout(function() {
