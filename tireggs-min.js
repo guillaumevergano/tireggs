@@ -30,18 +30,54 @@
                 img.style.width = settings.image.width;
                 img.style.height = settings.image.height;
                 img.style.position = 'absolute';
-                img.style.left = '100%'; // Déplace l'image hors de l'écran à droite
-
+                
                 var parent = document.querySelector(settings.position.div);
                 parent.appendChild(img);
 
-                // Animation de l'image
+                var startValue = '100%';
+                var endValue = '-100%';
+                var property = 'left';
+
+                switch (settings.animation.direction) {
+                    case 'rightleft':
+                        startValue = '100%';
+                        endValue = '-100%';
+                        property = 'left';
+                        break;
+                    case 'leftright':
+                        startValue = '-100%';
+                        endValue = '100%';
+                        property = 'left';
+                        break;
+                    case 'bottomtop':
+                        startValue = '100%';
+                        endValue = '-100%';
+                        property = 'top';
+                        break;
+                    case 'topbottom':
+                        startValue = '-100%';
+                        endValue = '100%';
+                        property = 'top';
+                        break;
+                    default:
+                        break;
+                }
+
+                img.style[property] = startValue;
+
                 setTimeout(function() {
-                    if (settings.animation.type === 'move' && settings.animation.direction === 'rightleft') {
-                        img.style.transition = `left 6s linear`; // Déplacement vers la gauche pendant 6 secondes
-                        img.style.left = '-50%'; // Fait sortir complètement l'image à gauche
-                    }
-                }, 1000); // Attendre 1 seconde avant de démarrer le déplacement
+                    img.style.transition = `${property} 2s linear`;
+                    img.style[property] = '50%';
+
+                    setTimeout(function() {
+                        img.style.transition = `${property} 9s linear`;
+                        img.style[property] = endValue;
+
+                        setTimeout(function() {
+                            img.remove();
+                        }, 9000);
+                    }, 2000);
+                }, 0);
             });
         });
     };

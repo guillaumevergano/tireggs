@@ -4,27 +4,29 @@
     <meta charset="UTF-8">
     <title>Animation avec tireggs</title>
     <link href="index.css" rel="stylesheet" />
-    <script src="tireggs-min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
 </head>
 <body>
-    <center>
-    <button class="user_level_icon"  >Cliquez ici</button>
-    </center>
+    <div class="text-center mt-3">
+        <button class="user_level_icon"  >Cliquez ici</button>
+    </div>
+    
     <div class="body">
         
 
         
     </div>
-    
 
+    <script src="tireggs-min.js"></script>
     <script>
         // Utilisation de tireggs-min.js
         document.addEventListener('DOMContentLoaded', function() {
             window.tireggs({
                 'image': {
-                    'url': 'zenis.gif', // URL de l'image
-                    'width': '20%', // Largeur de l'image (soit en px ou %)
-                    'height': '35%' // Hauteur de l'image (soit en px ou %)
+                    'url': 'bat.gif', // URL de l'image
+                    'width': '200px', // Largeur de l'image (soit en px ou %)
+                    'height': '200px' // Hauteur de l'image (soit en px ou %)
                 },
                 'trigger': {
                     'selector': '.user_level_icon', // Sélecteur de l'élément déclencheur
@@ -35,11 +37,11 @@
                     'at': 'center center' // Position de l'image par rapport à l'élément déclencheur
                 },
                 'apparition': {
-                    'type': 'fade', // Effet d'animation (fade ou none)
+                    'type': 'none', // Effet d'animation (fade ou none)
                     'duration': 1000 // Durée de l'animation (en ms)
                 },
                 'animation': {
-                    'type': 'move', // Effet d'animation (move ou fixed)
+                    'type': 'fixed', // Effet d'animation (move ou fixed)
                     'direction': 'rightleft' // choix pour la direction rightleft, leftright, bottomtop, topbottom
                 }
             });
