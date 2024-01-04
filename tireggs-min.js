@@ -38,8 +38,8 @@
                 // Animation de l'image
                 setTimeout(function() {
                     if (settings.animation.type === 'move' && settings.animation.direction === 'rightleft') {
-                        img.style.transition = `left 3s linear`; // Déplacement vers la gauche pendant 3 secondes
-                        img.style.left = '0';
+                        img.style.transition = `left 6s linear`; // Déplacement vers la gauche pendant 6 secondes
+                        img.style.left = '-50%'; // Fait sortir complètement l'image à gauche
                     }
                 }, 1000); // Attendre 1 seconde avant de démarrer le déplacement
             });
