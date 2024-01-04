@@ -15,7 +15,7 @@
                 at: 'center center'
             },
             animation: {
-                type: 'move',
+                type: 'move', // Par défaut, l'effet d'animation est défini sur 'move'
                 direction: 'rightleft'
             }
         };
@@ -65,19 +65,31 @@
 
                 img.style[property] = startValue;
 
-                setTimeout(function() {
-                    img.style.transition = `${property} 4s linear`;
-                    img.style[property] = '50%';
-
+                if (settings.animation.type === 'fixed') {
                     setTimeout(function() {
-                        img.style.transition = `${property} 7s linear`;
-                        img.style[property] = endValue;
+                        img.style.transition = 'opacity 1s linear';
+                        img.style[property] = '0';
+                        img.style.opacity = '0';
 
                         setTimeout(function() {
                             img.remove();
-                        }, 9000);
-                    }, 2000);
-                }, 0);
+                        }, 1000);
+                    }, 3000);
+                } else {
+                    setTimeout(function() {
+                        img.style.transition = `${property} 6s linear`;
+                        img.style[property] = '100%';
+
+                        setTimeout(function() {
+                            img.style.transition = `${property} 4s linear`;
+                            img.style[property] = endValue;
+
+                            setTimeout(function() {
+                                img.remove();
+                            }, 9000);
+                        }, 2000);
+                    }, 0);
+                }
             });
         });
     };
