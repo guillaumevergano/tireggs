@@ -8,7 +8,7 @@
             },
             trigger: {
                 selector: '',
-                event: 'click' // Gardons le click comme événement par défaut
+                event: 'click' 
             },
             position: {
                 div: '',
@@ -44,10 +44,57 @@
             img.src = settings.image.url;
             img.style.width = settings.image.width;
             img.style.height = settings.image.height;
-            img.style.position = 'absolute';
+            img.style.position = 'fixed';
             
             var parent = document.querySelector(settings.position.div);
+            parent.style.position = 'relative';
             parent.appendChild(img);
+
+
+                       
+
+            switch (settings.position.at) {
+                case 'center center':
+                    img.style.top = '50%';
+                    img.style.left = '50%';
+                    img.style.transform = 'translate(-50%, -50%)';
+                    break;
+                case 'center right':
+                    img.style.top = '50%';
+                    img.style.right = '0';
+                    img.style.transform = 'translateY(-50%)';
+                    break;
+                case 'center left':
+                    img.style.top = '50%';
+                    img.style.left = '0';
+                    img.style.transform = 'translateY(-50%)';
+                    break;
+                case 'right center':
+                    img.style.top = '50%';
+                    img.style.transform = 'translateY(-50%)';
+                    img.style.right = '0';
+                    break;
+                case 'left center':
+                    img.style.top = '50%';
+                    img.style.transform = 'translateY(-50%)';
+                    img.style.left = '0';
+                    break;
+                case 'right right':
+                    img.style.top = '50%';
+                    img.style.right = '0';
+                    img.style.transform = 'translate(0, -50%)'; // Ajustement pour le centrage vertical
+                    break;
+                case 'left left':
+                    img.style.top = '50%';
+                    img.style.left = '0';
+                    img.style.transform = 'translate(0, -50%)'; // Ajustement pour le centrage vertical
+                    break;
+                default:
+                    break;
+            }
+
+            
+
 
             var startValue = '100%';
             var endValue = '-100%';
@@ -74,6 +121,12 @@
                     endValue = '100%';
                     property = 'top';
                     break;
+                case 'none':
+                    startValue = '0';
+                    endValue = '0';// Si direction est "none", aucun mouvement n'est appliqué
+                    property = 'left'; // Peut être n'importe quelle propriété, car le mouvement est nul
+                    break;
+
                 default:
                     break;
             }
