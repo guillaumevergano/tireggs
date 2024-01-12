@@ -39,7 +39,7 @@
                 },
                 'trigger': {
                     'selector': '.user_level_icon', // Sélecteur de l'élément déclencheur
-                    'event': 'click' // Événement déclencheur (click ou sinon hover)
+                    'event': 'click' // Événement déclencheur (click ou sinon hover ou encore instant)
                 },
                 'position': {
                     'div': '.div-btn', // Sélecteur de l'élément parent
@@ -47,11 +47,12 @@
                 },
                 'apparition': {
                     'type': 'fade', // Effet d'animation (fade ou none) x
-                    'duration': 8000 // Durée de l'animation (en ms)
+                    'duration': 7500 // Durée de l'animation (en ms)
                 },
                 'animation': {
                     'type': 'move', // Effet d'animation (move ou fixed)
-                    'direction': 'rightleft' // choix pour la direction rightleft, leftright, bottomtop, topbottom, none(aucun direction pour le type 'fixed')
+                    'direction': 'bottomtop' // choix pour la direction rightleft, leftright, bottomtop, topbottom, none(aucun direction pour le type 'fixed')
+                    'close' : false ou true
                 }
             });
         });
