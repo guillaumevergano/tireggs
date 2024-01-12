@@ -40,60 +40,57 @@
         });
 
         function triggerAnimation(settings) {
+            var parent = document.querySelector(settings.position.div);
+            parent.style.position = 'relative';
+            parent.style.overflow = 'hidden'; // Assure que le parent ne dépasse pas sa taille
+
             var img = new Image();
             img.src = settings.image.url;
             img.style.width = settings.image.width;
             img.style.height = settings.image.height;
             img.style.position = 'fixed';
-            
-            var parent = document.querySelector(settings.position.div);
-            parent.style.position = 'relative';
+
             parent.appendChild(img);
 
-
-                       
+            var parentRect = parent.getBoundingClientRect();
+            var imgRect = img.getBoundingClientRect();
 
             switch (settings.position.at) {
                 case 'center center':
-                    img.style.top = '50%';
-                    img.style.left = '50%';
-                    img.style.transform = 'translate(-50%, -50%)';
+                    img.style.top = (parentRect.height - imgRect.height) / 2 + 'px';
+                    img.style.left = (parentRect.width - imgRect.width) / 2 + 'px';
                     break;
                 case 'center right':
-                    img.style.top = '50%';
-                    img.style.right = '0';
-                    img.style.transform = 'translateY(-50%)';
+                    img.style.top = (parentRect.height - imgRect.height) / 2 + 'px';
+                    img.style.left = parentRect.width - imgRect.width + 'px';
                     break;
                 case 'center left':
-                    img.style.top = '50%';
+                    img.style.top = (parentRect.height - imgRect.height) / 2 + 'px';
                     img.style.left = '0';
-                    img.style.transform = 'translateY(-50%)';
                     break;
                 case 'right center':
-                    img.style.top = '50%';
-                    img.style.transform = 'translateY(-50%)';
-                    img.style.right = '0';
+                    img.style.top = '0';
+                    img.style.left = parentRect.width - imgRect.width + 'px';
                     break;
                 case 'left center':
-                    img.style.top = '50%';
-                    img.style.transform = 'translateY(-50%)';
+                    img.style.top = '0';
                     img.style.left = '0';
                     break;
                 case 'right right':
-                    img.style.top = '50%';
-                    img.style.right = '0';
-                    img.style.transform = 'translate(0, -50%)'; // Ajustement pour le centrage vertical
+                    img.style.top = parentRect.height - imgRect.height + 'px';
+                    img.style.left = parentRect.width - imgRect.width + 'px';
                     break;
                 case 'left left':
-                    img.style.top = '50%';
+                    img.style.top = parentRect.height - imgRect.height + 'px';
                     img.style.left = '0';
-                    img.style.transform = 'translate(0, -50%)'; // Ajustement pour le centrage vertical
                     break;
+
+                // Ajoute d'autres cas selon tes besoins
+
                 default:
                     break;
             }
 
-            
 
 
             var startValue = '100%';
@@ -124,7 +121,7 @@
                 case 'none':
                     startValue = '0';
                     endValue = '0';// Si direction est "none", aucun mouvement n'est appliqué
-                    property = 'left'; // Peut être n'importe quelle propriété, car le mouvement est nul
+                    property = 'center'; // Peut être n'importe quelle propriété, car le mouvement est nul
                     break;
 
                 default:
