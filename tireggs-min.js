@@ -40,56 +40,46 @@
         });
 
         function triggerAnimation(settings) {
-            var parent = document.querySelector(settings.position.div);
-            parent.style.position = 'relative';
-            parent.style.overflow = 'hidden'; // Assure que le parent ne dépasse pas sa taille
-
             var img = new Image();
             img.src = settings.image.url;
             img.style.width = settings.image.width;
             img.style.height = settings.image.height;
             img.style.position = 'fixed';
-
+            
+            var parent = document.querySelector(settings.position.div);
+            parent.style.position = 'relative';
             parent.appendChild(img);
 
-            var parentRect = parent.getBoundingClientRect();
-            var imgRect = img.getBoundingClientRect();
 
-            switch (settings.position.at) {
-                case 'center center':
-                    img.style.top = (parentRect.height - imgRect.height) / 2 + 'px';
-                    img.style.left = (parentRect.width - imgRect.width) / 2 + 'px';
-                    break;
-                case 'center right':
-                    img.style.top = (parentRect.height - imgRect.height) / 2 + 'px';
-                    img.style.left = parentRect.width - imgRect.width + 'px';
-                    break;
-                case 'center left':
-                    img.style.top = (parentRect.height - imgRect.height) / 2 + 'px';
-                    img.style.left = '0';
-                    break;
-                case 'right center':
-                    img.style.top = '0';
-                    img.style.left = parentRect.width - imgRect.width + 'px';
-                    break;
-                case 'left center':
-                    img.style.top = '0';
-                    img.style.left = '0';
-                    break;
-                case 'right right':
-                    img.style.top = parentRect.height - imgRect.height + 'px';
-                    img.style.left = parentRect.width - imgRect.width + 'px';
-                    break;
-                case 'left left':
-                    img.style.top = parentRect.height - imgRect.height + 'px';
-                    img.style.left = '0';
-                    break;
+                       
 
-                // Ajoute d'autres cas selon tes besoins
-
-                default:
-                    break;
-            }
+        switch (settings.position.at) {
+            case 'center center':
+                img.style.top = 'calc(50% - ' + settings.image.height + '/2)';
+                img.style.left = 'calc(50% - ' + settings.image.width + '/2)';
+                break;
+            case 'center right':
+                img.style.top = 'calc(50% - ' + settings.image.height + '/2)';
+                img.style.right = '0';
+                break;
+            case 'center left':
+                img.style.top = 'calc(50% - ' + settings.image.height + '/2)';
+                img.style.left = '0';
+                break;
+            case 'right center':
+                img.style.top = 'calc(50% - ' + settings.image.height + '/2)';
+                img.style.right = '0';
+                img.style.transform = 'translateY(-50%)';
+                break;
+            case 'left center':
+                img.style.top = 'calc(50% - ' + settings.image.height + '/2)';
+                img.style.left = '0';
+                img.style.transform = 'translateY(-50%)';
+                break;
+            
+            default:
+                break;
+        }
 
 
 
