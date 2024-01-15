@@ -22,6 +22,11 @@
 						type: "fade",
 						duration: 1000,
 					},
+                    disparition: {
+                        concept: 'auto', // none, close, auto
+                        type: 'fade', // fade, none
+                        durationtoauto: 5000
+                    }
 				};
 
         var settings = Object.assign({}, defaults, options);
@@ -145,6 +150,20 @@
                     }, 0);
                 }, 0);
             }
+
+            if (settings.disparition.concept === 'auto') {
+                setTimeout(function() {
+                    if (settings.disparition.type === 'fade') {
+                        img.style.transition = `opacity ${settings.disparition.durationtoauto / 1000}s linear`;
+                        img.style.opacity = '0';
+            
+                        setTimeout(function() {
+                            img.remove();
+                        }, settings.disparition.durationtoauto);
+                    } else if (settings.disparition.type === 'none') {
+                        img.remove();
+                    }
+                }, 3000);
         }
     };
 })();
