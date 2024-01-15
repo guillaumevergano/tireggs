@@ -33,7 +33,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             window.tireggs({
                 'image': {
-                    'url': 'images/baki.gif', // URL de l'image
+                    'url': 'https://i.pinimg.com/originals/e5/ed/fe/e5edfe1c50f45d9858e99de0d890606a.gif', // URL de l'image
                     'width': '270px', // Largeur de l'image (soit en px ou %)
                     'height': '300px' // Hauteur de l'image (soit en px ou %)
                 },
@@ -50,10 +50,14 @@
                     'duration': 7500 // Durée de l'animation (en ms)
                 },
                 'animation': {
-                    'type': 'move', // Effet d'animation (move ou fixed)
-                    'direction': 'bottomtop' // choix pour la direction rightleft, leftright, bottomtop, topbottom, none(aucun direction pour le type 'fixed')
-                    'close' : false ou true
-                }
+                    'type': 'fixed', // Effet d'animation (move ou fixed)
+                    'direction': 'none', // choix pour la direction rightleft, leftright, bottomtop, topbottom, none(aucun direction pour le type 'fixed')
+                },
+                'disparition': {
+                  'concept': 'auto', // none, close (ajoute une croix pour delete), auto (disparition automatique)
+                  'type': 'fade', // Effet d'animation (fade ou none)
+                  'durationtoauto': 5000 
+                } // Fermeture de l'image (true ou false)
             });
         });
     </script>

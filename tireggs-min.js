@@ -1,28 +1,28 @@
 (function() {
     window.tireggs = function(options) {
         var defaults = {
-            image: {
-                url: '',
-                width: '50px',
-                height: '50px'
-            },
-            trigger: {
-                selector: '',
-                event: 'click' 
-            },
-            position: {
-                div: '',
-                at: 'center center'
-            },
-            animation: {
-                type: 'move',
-                direction: 'rightleft'
-            },
-            apparition: {
-                type: 'fade',
-                duration: 1000
-            }
-        };
+					image: {
+						url: "https://i.pinimg.com/originals/e5/ed/fe/e5edfe1c50f45d9858e99de0d890606a.gif",
+						width: "50px",
+						height: "50px",
+					},
+					trigger: {
+						selector: "",
+						event: "click",
+					},
+					position: {
+						div: "",
+						at: "center center",
+					},
+					animation: {
+						type: "move",
+						direction: "rightleft",
+					},
+					apparition: {
+						type: "fade",
+						duration: 1000,
+					},
+				};
 
         var settings = Object.assign({}, defaults, options);
 
