@@ -1,33 +1,33 @@
-(function() {
-    window.tireggs = function(options) {
+var tireggs = (function() {
+    return function(options) {
         var defaults = {
-					image: {
-						url: "https://i.pinimg.com/originals/e5/ed/fe/e5edfe1c50f45d9858e99de0d890606a.gif",
-						width: "50px",
-						height: "50px",
-					},
-					trigger: {
-						selector: "",
-						event: "click",
-					},
-					position: {
-						div: "",
-						at: "center center",
-					},
-					animation: {
-						type: "move",
-						direction: "rightleft",
-					},
-					apparition: {
-						type: "fade",
-						duration: 1000,
-					},
-                    disparition: {
-                        concept: 'auto', // none, close, auto
-                        type: 'fade', // fade, none
-                        durationtoauto: 5000
-                    }
-				};
+            image: {
+                url: "https://i.pinimg.com/originals/e5/ed/fe/e5edfe1c50f45d9858e99de0d890606a.gif",
+                width: "50px",
+                height: "50px",
+            },
+            trigger: {
+                selector: "",
+                event: "click",
+            },
+            position: {
+                div: "",
+                at: "center center",
+            },
+            animation: {
+                type: "move",
+                direction: "rightleft",
+            },
+            apparition: {
+                type: "fade",
+                duration: 1000,
+            },
+            disparition: {
+                concept: 'auto', // none, close, auto
+                type: 'fade', // fade, none
+                durationtoauto: 5000
+            }
+        };
 
         var settings = Object.assign({}, defaults, options);
 
@@ -50,43 +50,38 @@
             img.style.width = settings.image.width;
             img.style.height = settings.image.height;
             img.style.position = 'fixed';
-            
+
             var parent = document.querySelector(settings.position.div);
             parent.style.position = 'relative';
             parent.appendChild(img);
 
+            switch (settings.position.at) {
+                case 'center center':
+                    img.style.top = `calc(50% - ${settings.image.height} / 2)`;
+                    img.style.left = `calc(50% - ${settings.image.width} / 2)`;
+                    break;
+                case 'center right':
+                    img.style.top = `calc(50% - ${settings.image.height} / 2)`;
+                    img.style.right = '0';
+                    break;
+                case 'center left':
+                    img.style.top = `calc(50% - ${settings.image.height} / 2)`;
+                    img.style.left = '0';
+                    break;
+                case 'right center':
+                    img.style.top = `calc(50% - ${settings.image.height} / 2)`;
+                    img.style.right = '0';
+                    img.style.transform = 'translateY(-50%)';
+                    break;
+                case 'left center':
+                    img.style.top = `calc(50% - ${settings.image.height} / 2)`;
+                    img.style.left = '0';
+                    img.style.transform = 'translateY(-50%)';
+                    break;
 
-                       
-
-        switch (settings.position.at) {
-            case 'center center':
-                img.style.top = 'calc(50% - ' + settings.image.height + '/2)';
-                img.style.left = 'calc(50% - ' + settings.image.width + '/2)';
-                break;
-            case 'center right':
-                img.style.top = 'calc(50% - ' + settings.image.height + '/2)';
-                img.style.right = '0';
-                break;
-            case 'center left':
-                img.style.top = 'calc(50% - ' + settings.image.height + '/2)';
-                img.style.left = '0';
-                break;
-            case 'right center':
-                img.style.top = 'calc(50% - ' + settings.image.height + '/2)';
-                img.style.right = '0';
-                img.style.transform = 'translateY(-50%)';
-                break;
-            case 'left center':
-                img.style.top = 'calc(50% - ' + settings.image.height + '/2)';
-                img.style.left = '0';
-                img.style.transform = 'translateY(-50%)';
-                break;
-            
-            default:
-                break;
-        }
-
-
+                default:
+                    break;
+            }
 
             var startValue = '100%';
             var endValue = '-100%';
@@ -115,7 +110,7 @@
                     break;
                 case 'none':
                     startValue = '0';
-                    endValue = '0';// Si direction est "none", aucun mouvement n'est appliqué
+                    endValue = '0'; // Si direction est "none", aucun mouvement n'est appliqué
                     property = 'center'; // Peut être n'importe quelle propriété, car le mouvement est nul
                     break;
 
@@ -127,7 +122,7 @@
 
             if (settings.animation.type === 'fixed') {
                 setTimeout(function() {
-                    img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear, ${property} ${settings.apparition.duration / 1000}s linear`;
+                    img.style.transition = `left ${settings.apparition.duration / 1000}s linear, opacity ${settings.apparition.duration / 1000}s linear`;
                     img.style[property] = '0';
                     img.style.opacity = '0';
 
@@ -156,7 +151,7 @@
                     if (settings.disparition.type === 'fade') {
                         img.style.transition = `opacity ${settings.disparition.durationtoauto / 1000}s linear`;
                         img.style.opacity = '0';
-            
+
                         setTimeout(function() {
                             img.remove();
                         }, settings.disparition.durationtoauto);
@@ -164,6 +159,7 @@
                         img.remove();
                     }
                 }, 3000);
+            }
         }
     };
 })();
