@@ -159,6 +159,21 @@ var tireggs = (function() {
                         img.remove();
                     }
                 }, 3000);
+            } else if (settings.disparition.concept === 'close'){
+                 // après : Ajoute la logique pour afficher une croix (x) et permettre la fermeture
+                    var closeButton = document.createElement('div');
+                    closeButton.innerHTML = '<img src="images/croix.png">'; // Code HTML pour la croix (x)
+                    closeButton.style.position = 'absolute';
+                    closeButton.style.top = '0';
+                    closeButton.style.right = '0';
+                    closeButton.style.cursor = 'pointer';
+
+                    closeButton.addEventListener('click', function() {
+                        img.remove();
+                    });
+
+                    img.appendChild(closeButton);
+
             }
         }
     };

@@ -25,4 +25,39 @@
     margin: 59px;
   }
 
+  .level-bar {
+    position: relative;
+  }
+  
+  .frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 479px;
+    background-repeat: no-repeat;
+    background-image: url(https://www.dropbox.com/s/u1goqyzz1jpj51f/GuildMain2_BarFrame.png?dl=1);
+  }
+  
+  .underlay {
+    height: 20px;
+    width: 0;
+    background-position: 0 100%;
+    background-image: url(https://www.dropbox.com/s/oweepr3p3dq3odz/GuildMain2_BarUnderlay.png?dl=1);
+    transition: all 1.5s ease-out;
+  }
+  
+  
+  .overlay {
+    height: 20px;
+    width: 0;
+    background-position: 100% 0;
+    background-image: url(https://www.dropbox.com/s/aq9f5gg59kvw0ec/GuildMain2_BarOverlay.png?dl=1);
+    transition: all 1.5s ease-out;
+  }
+  
+  button {
+    margin-top: 20px;
+  }
+
   
