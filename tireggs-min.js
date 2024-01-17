@@ -151,7 +151,7 @@ var tireggs = (function() {
                     if (settings.disparition.type === 'fade') {
                         img.style.transition = `opacity ${settings.disparition.durationtoauto / 1000}s linear`;
                         img.style.opacity = '0';
-
+            
                         setTimeout(function() {
                             img.remove();
                         }, settings.disparition.durationtoauto);
@@ -159,22 +159,22 @@ var tireggs = (function() {
                         img.remove();
                     }
                 }, 3000);
-            } else if (settings.disparition.concept === 'close'){
-                 // après : Ajoute la logique pour afficher une croix (x) et permettre la fermeture
-                    var closeButton = document.createElement('div');
-                    closeButton.innerHTML = '<img src="images/croix.png">'; // Code HTML pour la croix (x)
-                    closeButton.style.position = 'absolute';
-                    closeButton.style.top = '0';
-                    closeButton.style.right = '0';
-                    closeButton.style.cursor = 'pointer';
-
-                    closeButton.addEventListener('click', function() {
-                        img.remove();
-                    });
-
-                    img.appendChild(closeButton);
-
+            } else if (settings.disparition.concept === 'close') {
+                // Ajoute la logique pour afficher une croix (x) et permettre la fermeture
+                var closeButton = document.createElement('div');
+                closeButton.innerHTML = '<img src="images/croix.png" style="width: 20px; height: 20px; cursor: pointer;">'; // Code HTML pour la croix (x)
+                closeButton.style.position = 'absolute';
+                closeButton.style.top = '0';
+                closeButton.style.right = '0';
+                closeButton.style.cursor = 'pointer';
+            
+                closeButton.addEventListener('click', function() {
+                    img.remove();
+                });
+            
+                img.appendChild(closeButton);
             }
+            
         }
     };
 })();
