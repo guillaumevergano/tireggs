@@ -165,7 +165,7 @@ var tireggs = (function() {
             } else if (settings.disparition.concept === 'close'){
                 // après : Ajoute la logique pour afficher une croix (x) et permettre la fermeture
                 var closeButton = document.createElement('div');
-                closeButton.innerHTML = '<img src="../croix.png" style="width: 20px; height: 20px; cursor: pointer;">'; // Code HTML pour la croix (x)
+                closeButton.innerHTML = '<a id="closeButton" style="display: none;"><img src="images/croix.png" style="width: 20px; height: 20px; cursor: pointer;"></a>'; // Code HTML pour la croix (x)
                 closeButton.style.position = 'absolute';
                 closeButton.style.top = '0';
                 closeButton.style.right = '0';
