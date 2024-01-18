@@ -10,7 +10,6 @@
 </head>
 <body>
 <div class="body">
-    <script src="Do_the_things.js"></script>
     <script src="tireggs-min.js"></script>
     <!-- Votre contenu HTML -->
     <div class="text-center mt-3 div-btn">
@@ -28,15 +27,6 @@
         </p>
     </div>
 </div>
-
-<div class="level-bar">
-    <div class="underlay">
-      <div class="overlay"></div>
-    </div>
-    <div class="frame"></div>
-  </div>
-  
-  <button id="doTheThing">augmente ton niveau</button>
 
 <script>
     // Utilisation de tireggs-min.js
@@ -64,7 +54,7 @@
                 'direction': 'none', // choix pour la direction rightleft, leftright, bottomtop, topbottom, none(aucun direction pour le type 'fixed')
             },
             'disparition': {
-                'concept': 'close', // none, close (ajoute une croix pour delete), auto (disparition automatique)
+                'concept': 'auto', // none, close (ajoute une croix pour delete), auto (disparition automatique)
                 'type': 'fade', // Effet d'animation (fade ou none)
                 'durationtoauto': 5000
             } // Fermeture de l'image (true ou false)
