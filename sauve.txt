@@ -39,7 +39,7 @@
             },
             'trigger': {
                 'selector': '.user_level_icon', // Sélecteur de l'élément déclencheur
-                'event': 'instant' // Événement déclencheur (click ou sinon hover ou encore instant)
+                'event': 'click' // Événement déclencheur (click ou sinon hover ou encore instant)
             },
             'position': {
                 'div': '.div-btn', // Sélecteur de l'élément parent

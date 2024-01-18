@@ -41,6 +41,9 @@ var tireggs = (function() {
                 element.addEventListener('mouseenter', function() {
                     triggerAnimation(settings);
                 });
+            } else if (settings.trigger.event === 'instant'){
+                
+                triggerAnimation(settings);
             }
         });
 
