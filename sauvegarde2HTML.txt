@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Animation avec tireggs</title>
+    <link href="index.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- le fichier tireggs-min.js -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="tireggs-min.js"></script>
+</head>
+
+<body>
+    <div class="body">
+        <!-- Barre de niveau -->
+        <div class="progress">
+            <div id="levelBar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                aria-valuemax="100"></div>
+        </div>
+
+        <!-- Contenu HTML -->
+        <div class="text-center mt-3 div-btn">
+            <button class="user_level_icon">Cliquez ici</button>
+            <!-- ... Autre contenu ... -->
+        </div>
+    </div>
+
+    <script>
+        // Logique de déclenchement basée sur la barre de niveau
+        document.addEventListener('DOMContentLoaded', function () {
+            // Simulez l'augmentation du niveau au fil du temps
+            let currentLevel = 0;
+            const maxLevel = 100;
+            const increaseRate = 1;
+
+            function increaseLevel() {
+                currentLevel += increaseRate;
+                $('#levelBar').css('width', `${currentLevel}%`).attr('aria-valuenow', currentLevel);
+
+                if (currentLevel < maxLevel) {
+                    setTimeout(increaseLevel, 100); // Appel récursif pour simuler l'augmentation
+                } else {
+                    // Niveau maximal atteint, déclencher l'animation
+                    window.tireggs({
+                        'image': {
+                            'url': 'https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/f9a0962dfe5b331bea410429d45db287-1648731760/kaido/do-pixel-art-animated-gif.gif', // URL de l'image
+                            'width': '270px', // Largeur de l'image (soit en px ou %)
+                            'height': '300px' // Hauteur de l'image (soit en px ou %)
+                        },
+                        'trigger': {
+                            'selector': '.user_level_icon', // Sélecteur de l'élément déclencheur
+                            'event': 'instant' // Événement déclencheur (click ou sinon hover ou encore instant)
+                        },
+                        'position': {
+                            'div': '.div-btn', // Sélecteur de l'élément parent
+                            'at': 'center center' // Position de l'image par rapport à l'élément déclencheur
+                        },
+                        'apparition': {
+                            'type': 'fade', // Effet d'animation (fade ou none)
+                            'duration': 7500 // Durée de l'animation (en ms)
+                        },
+                        'animation': {
+                            'type': 'fixed', // Effet d'animation (move ou fixed)
+                            'direction': 'none', // choix pour la direction rightleft, leftright, bottomtop, topbottom, none(aucun direction pour le type 'fixed')
+                        },
+                        'disparition': {
+                            'concept': 'auto', // none, close (ajoute une croix pour delete), auto (disparition automatique)
+                            'type': 'fade', // Effet d'animation (fade ou none)
+                            'durationtoauto': 5000
+                        } // Fermeture de l'image (true ou false)
+                    });
+                }
+            }
+
+            // Démarrez l'augmentation du niveau
+            increaseLevel();
+        });
+    </script>
+</body>
+
+</html>

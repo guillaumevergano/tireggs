@@ -5,13 +5,14 @@ var tireggs = (function() {
                 url: "https://i.pinimg.com/originals/e5/ed/fe/e5edfe1c50f45d9858e99de0d890606a.gif",
                 width: "50px",
                 height: "50px",
+                background: 'cover'
             },
             trigger: {
                 selector: "",
                 event: "click",
             },
             position: {
-                div: "",
+                fullscreen: false,
                 at: "center center",
             },
             animation: {
@@ -23,8 +24,8 @@ var tireggs = (function() {
                 duration: 1000,
             },
             disparition: {
-                concept: 'auto', // none, close, auto
-                type: 'fade', // fade, none
+                concept: 'auto',
+                type: 'fade',
                 durationtoauto: 5000
             }
         };
@@ -41,8 +42,7 @@ var tireggs = (function() {
                 element.addEventListener('mouseenter', function() {
                     triggerAnimation(settings);
                 });
-            } else if (settings.trigger.event === 'instant'){
-                
+            } else if (settings.trigger.event === 'instant') {
                 triggerAnimation(settings);
             }
         });
@@ -52,10 +52,21 @@ var tireggs = (function() {
             img.src = settings.image.url;
             img.style.width = settings.image.width;
             img.style.height = settings.image.height;
+            img.style.background = settings.image.background; // code pour 'background'
             img.style.position = 'fixed';
+            img.style.zIndex = "9999999999999";
 
-            var parent = document.querySelector(settings.position.div);
-            parent.style.position = 'relative';
+            var parent = document.querySelector('body');
+            parent.style.display = 'flex'; ///  nouvelle ajout display : flex
+
+            if (settings.position.fullscreen) { /// code pour 'fullscreen' 
+                img.style.width = '100vw';
+                img.style.height = '100vh';
+                parent.style.overflow = 'hidden';
+            } else {
+                parent.style.overflow = 'auto';
+            }
+
             parent.appendChild(img);
 
             switch (settings.position.at) {
