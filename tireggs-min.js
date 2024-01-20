@@ -52,22 +52,33 @@ var tireggs = (function() {
             img.src = settings.image.url;
             img.style.width = settings.image.width;
             img.style.height = settings.image.height;
-            img.style.background = settings.image.background; // code pour 'background'
             img.style.position = 'fixed';
             img.style.zIndex = "9999999999999";
 
-            var parent = document.querySelector('body');
-            parent.style.display = 'flex'; ///  nouvelle ajout display : flex
+            var parent = document.querySelector(settings.position.div);
 
-            if (settings.position.fullscreen) { /// code pour 'fullscreen' 
-                img.style.width = '100vw';
-                img.style.height = '100vh';
-                parent.style.overflow = 'hidden';
+            if (settings.position.fullscreen) {
+                // Si fullscreen est true, utilise la taille de la div parent
+                parent.style.width = '100%';
+                parent.style.height = '100vh';
+                parent.style.overflow = 'hidden'; // Empêche le défilement si l'image est plus grande que la div
+
+                // Utilisation de l'image comme arrière-plan avec cover
+                parent.style.backgroundImage = `url(${settings.image.url})`;
+                parent.style.backgroundPosition = 'center center';
+                parent.style.backgroundSize = 'cover';
+                parent.style.display = 'flex';
+                parent.style.alignItems = 'center';
+                parent.style.justifyContent = 'center';
             } else {
-                parent.style.overflow = 'auto';
-            }
+                // Si fullscreen est false, utilise la taille de la div parent
+                parent.style.display = 'flex';
+                parent.style.alignItems = 'center';
+                parent.style.justifyContent = 'center';
 
-            parent.appendChild(img);
+                // Ajout de l'image à la div
+                parent.appendChild(img);
+            }
 
             switch (settings.position.at) {
                 case 'center center':
