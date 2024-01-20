@@ -59,8 +59,8 @@ var tireggs = (function() {
 
             if (settings.position.fullscreen) {
                 // Si fullscreen est true, utilise la taille de la div parent
-                parent.style.width = '100%';
-                parent.style.height = '100vh';
+                parent.style.width = 'auto'; // La taille de la div parent est maintenant fixée à la largeur de la fenêtre
+                parent.style.height = 'auto';
                 parent.style.overflow = 'hidden'; // Empêche le défilement si l'image est plus grande que la div
 
                 // Utilisation de l'image comme arrière-plan avec cover
@@ -72,6 +72,8 @@ var tireggs = (function() {
                 parent.style.justifyContent = 'center';
             } else {
                 // Si fullscreen est false, utilise la taille de la div parent
+                parent.style.width = settings.image.width; // Fixer la largeur de la div parent à la largeur de l'image
+                parent.style.height = settings.image.height; // Fixer la hauteur de la div parent à la hauteur de l'image
                 parent.style.display = 'flex';
                 parent.style.alignItems = 'center';
                 parent.style.justifyContent = 'center';
