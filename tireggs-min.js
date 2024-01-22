@@ -150,32 +150,46 @@ var tireggs = (function() {
 
             if (settings.animation.type === 'fixed') {
                 setTimeout(function() {
-                    img.style.transition = `left ${settings.apparition.duration / 1000}s linear, opacity ${settings.apparition.duration / 1000}s linear`;
-                    img.style[property] = '0';
+                    img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
                     img.style.opacity = '0';
-
+            
                     setTimeout(function() {
-                        img.remove();
-                        parent.remove();
-                    }, settings.apparition.duration);
+                        img.style.opacity = '1';
+            
+                        setTimeout(function() {
+                            img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
+                            img.style.opacity = '0';
+            
+                            setTimeout(function() {
+                                img.remove();
+                                parent.remove();
+                            }, settings.apparition.duration);
+                        }, 0);
+                    }, 0);
                 }, 3000);
             } else {
                 setTimeout(function() {
-                    img.style.transition = `${property} ${settings.apparition.duration / 1000}s linear`;
-                    img.style[property] = '0';
-
+                    img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
+                    img.style.opacity = '0';
+            
                     setTimeout(function() {
-                        img.style.transition = `${property} ${settings.apparition.duration / 1000}s linear`;
-                        img.style[property] = endValue;
-
+                        img.style.opacity = '1';
+            
                         setTimeout(function() {
-                            img.remove();
-                            parent.remove();
-                        }, settings.apparition.duration * 2);
+                            img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
+                            img.style.opacity = '0';
+            
+                            setTimeout(function() {
+                                img.remove();
+                                parent.remove();
+                            }, settings.apparition.duration);
+                        }, 0);
                     }, 0);
                 }, 0);
             }
-
+            
+            // ...
+            
             if (settings.disparition.concept === 'auto') {
                 // Si le concept de disparition est 'auto'
                 setTimeout(function() {
@@ -183,7 +197,7 @@ var tireggs = (function() {
                         // Si le type d'animation est 'fade'
                         img.style.transition = `opacity ${settings.disparition.durationtoauto / 1000}s linear`;
                         img.style.opacity = '0';
-
+            
                         setTimeout(function() {
                             img.remove();
                             parent.remove();
@@ -202,12 +216,12 @@ var tireggs = (function() {
                 closeButton.style.top = '0';
                 closeButton.style.right = '0';
                 closeButton.style.cursor = 'pointer';
-
+            
                 closeButton.addEventListener('click', function() {
                     img.remove();
                     parent.remove();
                 });
-
+            
                 parent.appendChild(closeButton);
             }
 
