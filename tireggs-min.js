@@ -53,27 +53,28 @@ var tireggs = (function() {
             img.style.width = settings.image.width;
             img.style.height = settings.image.height;
             img.style.position = 'fixed';
-            img.style.zIndex = "9999999999999";
+            
 
-            var parent = document.querySelector(settings.position.div);
+            var parent = document.createElement('div');
 
             if (settings.position.fullscreen) {
-                // Si fullscreen est true, utilise la taille de la div parent
-                parent.style.width = 'auto'; // La taille de la div parent est maintenant fixée à la largeur de la fenêtre
-                parent.style.height = 'auto';
+                // Si fullscreen est true, utilise la taille de l'écran
+                parent.style.position = 'fixed';
+                parent.style.top = '0';
+                parent.style.left = '0';
+                parent.style.width = '100%';
+                parent.style.height = '100vh';
                 parent.style.overflow = 'hidden'; // Empêche le défilement si l'image est plus grande que la div
 
                 // Utilisation de l'image comme arrière-plan avec cover
                 parent.style.backgroundImage = `url(${settings.image.url})`;
                 parent.style.backgroundPosition = 'center center';
-                parent.style.backgroundSize = 'cover';
+                parent.style.backgroundSize = settings.image.background;
                 parent.style.display = 'flex';
                 parent.style.alignItems = 'center';
                 parent.style.justifyContent = 'center';
             } else {
                 // Si fullscreen est false, utilise la taille de la div parent
-                parent.style.width = settings.image.width; // Fixer la largeur de la div parent à la largeur de l'image
-                parent.style.height = settings.image.height; // Fixer la hauteur de la div parent à la hauteur de l'image
                 parent.style.display = 'flex';
                 parent.style.alignItems = 'center';
                 parent.style.justifyContent = 'center';
@@ -155,6 +156,7 @@ var tireggs = (function() {
 
                     setTimeout(function() {
                         img.remove();
+                        parent.remove();
                     }, settings.apparition.duration);
                 }, 3000);
             } else {
@@ -168,6 +170,7 @@ var tireggs = (function() {
 
                         setTimeout(function() {
                             img.remove();
+                            parent.remove();
                         }, settings.apparition.duration * 2);
                     }, 0);
                 }, 0);
@@ -183,13 +186,15 @@ var tireggs = (function() {
 
                         setTimeout(function() {
                             img.remove();
+                            parent.remove();
                         }, settings.disparition.durationtoauto);
                     } else if (settings.disparition.type === 'none') {
                         // Si le type d'animation est 'none', simplement retirer l'image
                         img.remove();
+                        parent.remove();
                     }
-                }, 3000);// Attendre 3000 ms (3 secondes) avant de déclencher la disparition automatique
-            } else if (settings.disparition.concept === 'close'){
+                }, 3000); // Attendre 3000 ms (3 secondes) avant de déclencher la disparition automatique
+            } else if (settings.disparition.concept === 'close') {
                 // après : Ajoute la logique pour afficher une croix (x) et permettre la fermeture
                 var closeButton = document.createElement('div');
                 closeButton.innerHTML = '<a id="closeButton" style="display: none;"><img src="images/croix.png" style="width: 20px; height: 20px; cursor: pointer;"></a>'; // Code HTML pour la croix (x)
@@ -200,11 +205,13 @@ var tireggs = (function() {
 
                 closeButton.addEventListener('click', function() {
                     img.remove();
+                    parent.remove();
                 });
 
-                img.appendChild(closeButton);
+                parent.appendChild(closeButton);
             }
-            
+
+            document.body.appendChild(parent);
         }
     };
 })();
