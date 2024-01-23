@@ -1,4 +1,8 @@
 var tireggs = (function() {
+    // Création de la div parent en dehors de la fonction triggerAnimation
+    var parent = document.createElement('div');
+    document.body.appendChild(parent);
+
     return function(options) {
         var defaults = {
             image: {
@@ -53,9 +57,6 @@ var tireggs = (function() {
             img.style.width = settings.image.width;
             img.style.height = settings.image.height;
             img.style.position = 'fixed';
-            
-
-            var parent = document.createElement('div');
 
             if (settings.position.fullscreen) {
                 // Si fullscreen est true, utilise la taille de l'écran
@@ -64,7 +65,7 @@ var tireggs = (function() {
                 parent.style.left = '0';
                 parent.style.width = '100%';
                 parent.style.height = '100vh';
-                parent.style.overflow = 'hidden'; // Empêche le défilement si l'image est plus grande que la div
+                parent.style.overflow = 'hidden';
 
                 // Utilisation de l'image comme arrière-plan avec cover
                 parent.style.backgroundImage = `url(${settings.image.url})`;
@@ -111,90 +112,82 @@ var tireggs = (function() {
                     break;
             }
 
-            var startValue = '100%';
-            var endValue = '-100%';
-            var property = 'left';
+                var startValue = '100%';
+                var endValue = '-100%';
+                var property = 'left';
 
-            switch (settings.animation.direction) {
-                case 'rightleft':
-                    startValue = '100%';
-                    endValue = '-100%';
-                    property = 'left';
-                    break;
-                case 'leftright':
-                    startValue = '-100%';
-                    endValue = '100%';
-                    property = 'left';
-                    break;
-                case 'bottomtop':
-                    startValue = '100%';
-                    endValue = '-100%';
-                    property = 'top';
-                    break;
-                case 'topbottom':
-                    startValue = '-100%';
-                    endValue = '100%';
-                    property = 'top';
-                    break;
-                case 'none':
-                    startValue = '0';
-                    endValue = '0'; // Si direction est "none", aucun mouvement n'est appliqué
-                    property = 'center'; // Peut être n'importe quelle propriété, car le mouvement est nul
-                    break;
+                switch (settings.animation.direction) {
+                    case 'rightleft':
+                        startValue = '100%';
+                        endValue = '-100%';
+                        property = 'left';
+                        break;
+                    case 'leftright':
+                        startValue = '-100%';
+                        endValue = '100%';
+                        property = 'left';
+                        break;
+                    case 'bottomtop':
+                        startValue = '100%';
+                        endValue = '-100%';
+                        property = 'top';
+                        break;
+                    case 'topbottom':
+                        startValue = '-100%';
+                        endValue = '100%';
+                        property = 'top';
+                        break;
+                    case 'none':
+                        startValue = '0';
+                        endValue = '0';
+                        property = 'center';
+                        break;
 
-                default:
-                    break;
-            }
+                    default:
+                        break;
+                }
 
-            img.style[property] = startValue;
+                img.style[property] = startValue;
 
-            if (settings.animation.type === 'fixed') {
-                setTimeout(function() {
-                    img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
-                    img.style.opacity = '0';
-            
+                if (settings.animation.type === 'fixed') {
                     setTimeout(function() {
-                        img.style.opacity = '1';
-            
+                        img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
+                        img.style.opacity = '0';
+
                         setTimeout(function() {
-                            img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
-                            img.style.opacity = '0';
-            
+                            img.style.opacity = '1';
+
+                            setTimeout(function() {
+                                img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
+                                img.style.opacity = '0';
+
+                                setTimeout(function() {
+                                    img.remove();
+                                    parent.remove();
+                                }, settings.apparition.duration);
+                            }, 0);
+                        }, 0);
+                    }, 3000);
+                } else {
+                    setTimeout(function() {
+                        img.style.transition = `${property} ${settings.apparition.duration / 1000}s linear`;
+                        img.style[property] = '0';
+
+                        setTimeout(function() {
+                            img.style.transition = `${property} ${settings.apparition.duration / 1000}s linear`;
+                            img.style[property] = endValue;
+
                             setTimeout(function() {
                                 img.remove();
                                 parent.remove();
                             }, settings.apparition.duration);
                         }, 0);
                     }, 0);
-                }, 3000);
-            } else {
-                setTimeout(function() {
-                    img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
-                    img.style.opacity = '0';
-            
-                    setTimeout(function() {
-                        img.style.opacity = '1';
-            
-                        setTimeout(function() {
-                            img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
-                            img.style.opacity = '0';
-            
-                            setTimeout(function() {
-                                img.remove();
-                                parent.remove();
-                            }, settings.apparition.duration);
-                        }, 0);
-                    }, 0);
-                }, 0);
-            }
-            
-            // ...
+                }
             
             if (settings.disparition.concept === 'auto') {
-                // Si le concept de disparition est 'auto'
                 setTimeout(function() {
                     if (settings.disparition.type === 'fade') {
-                        // Si le type d'animation est 'fade'
                         img.style.transition = `opacity ${settings.disparition.durationtoauto / 1000}s linear`;
                         img.style.opacity = '0';
             
@@ -203,15 +196,13 @@ var tireggs = (function() {
                             parent.remove();
                         }, settings.disparition.durationtoauto);
                     } else if (settings.disparition.type === 'none') {
-                        // Si le type d'animation est 'none', simplement retirer l'image
                         img.remove();
                         parent.remove();
                     }
-                }, 3000); // Attendre 3000 ms (3 secondes) avant de déclencher la disparition automatique
+                }, 3000);
             } else if (settings.disparition.concept === 'close') {
-                // après : Ajoute la logique pour afficher une croix (x) et permettre la fermeture
                 var closeButton = document.createElement('div');
-                closeButton.innerHTML = '<a id="closeButton" style="display: none;"><img src="images/croix.png" style="width: 20px; height: 20px; cursor: pointer;"></a>'; // Code HTML pour la croix (x)
+                closeButton.innerHTML = '<a id="closeButton" style="display: none;"><img src="images/croix.png" style="width: 20px; height: 20px; cursor: pointer;"></a>';
                 closeButton.style.position = 'absolute';
                 closeButton.style.top = '0';
                 closeButton.style.right = '0';
