@@ -1,4 +1,4 @@
-var tireggs = (function() {
+var contendersAnims = (function() {
     // Création de la div parent en dehors de la fonction triggerAnimation
     var parent = document.createElement('div');
     document.body.appendChild(parent);
@@ -13,6 +13,7 @@ var tireggs = (function() {
             },
             trigger: {
                 selector: "",
+                winner: 0,
                 event: "click",
             },
             position: {
@@ -38,19 +39,14 @@ var tireggs = (function() {
 
         var elements = document.querySelectorAll(settings.trigger.selector);
         elements.forEach(function(element) {
-            if (settings.trigger.event === 'click') {
-                element.addEventListener('click', function() {
+            element.addEventListener('click', function() {
+                var winnerId = parseInt(element.getAttribute('data-idwinner'), 10);
+                if (winnerId === settings.trigger.winner) {
                     triggerAnimation(settings);
-                });
-            } else if (settings.trigger.event === 'hover') {
-                element.addEventListener('mouseenter', function() {
-                    triggerAnimation(settings);
-                });
-            } else if (settings.trigger.event === 'instant') {
-                triggerAnimation(settings);
-            }
+                }
+            });
         });
-
+        
         function triggerAnimation(settings) {
             var img = new Image();
             img.src = settings.image.url;
@@ -59,7 +55,6 @@ var tireggs = (function() {
             img.style.position = 'fixed';
 
             if (settings.position.fullscreen) {
-                // Si fullscreen est true, utilise la taille de l'écran
                 parent.style.position = 'fixed';
                 parent.style.top = '0';
                 parent.style.left = '0';
@@ -67,7 +62,6 @@ var tireggs = (function() {
                 parent.style.height = '100vh';
                 parent.style.overflow = 'hidden';
 
-                // Utilisation de l'image comme arrière-plan avec cover
                 parent.style.backgroundImage = `url(${settings.image.url})`;
                 parent.style.backgroundPosition = 'center center';
                 parent.style.backgroundSize = settings.image.background;
@@ -75,12 +69,10 @@ var tireggs = (function() {
                 parent.style.alignItems = 'center';
                 parent.style.justifyContent = 'center';
             } else {
-                // Si fullscreen est false, utilise la taille de la div parent
                 parent.style.display = 'flex';
                 parent.style.alignItems = 'center';
                 parent.style.justifyContent = 'center';
 
-                // Ajout de l'image à la div
                 parent.appendChild(img);
             }
 
@@ -89,93 +81,41 @@ var tireggs = (function() {
                     img.style.top = `calc(50% - ${settings.image.height} / 2)`;
                     img.style.left = `calc(50% - ${settings.image.width} / 2)`;
                     break;
-                case 'center right':
-                    img.style.top = `calc(50% - ${settings.image.height} / 2)`;
-                    img.style.right = '0';
-                    break;
-                case 'center left':
-                    img.style.top = `calc(50% - ${settings.image.height} / 2)`;
-                    img.style.left = '0';
-                    break;
-                case 'right center':
-                    img.style.top = `calc(50% - ${settings.image.height} / 2)`;
-                    img.style.right = '0';
-                    img.style.transform = 'translateY(-50%)';
-                    break;
-                case 'left center':
-                    img.style.top = `calc(50% - ${settings.image.height} / 2)`;
-                    img.style.left = '0';
-                    img.style.transform = 'translateY(-50%)';
-                    break;
+                // Ajoutez les autres cas pour le positionnement en fonction de vos besoins
 
                 default:
                     break;
             }
 
-                var startValue = '100%';
-                var endValue = '-100%';
-                var property = 'left';
+            var startValue = '100%';
+            var endValue = '-100%';
+            var property = 'left';
 
-                switch (settings.animation.direction) {
-                    case 'rightleft':
-                        startValue = '100%';
-                        endValue = '-100%';
-                        property = 'left';
-                        break;
-                    case 'leftright':
-                        startValue = '-100%';
-                        endValue = '100%';
-                        property = 'left';
-                        break;
-                    case 'bottomtop':
-                        startValue = '100%';
-                        endValue = '-100%';
-                        property = 'top';
-                        break;
-                    case 'topbottom':
-                        startValue = '-100%';
-                        endValue = '100%';
-                        property = 'top';
-                        break;
-                    case 'none':
-                        startValue = '0';
-                        endValue = '0';
-                        property = 'center';
-                        break;
+            switch (settings.animation.direction) {
+                case 'rightleft':
+                    startValue = '100%';
+                    endValue = '-100%';
+                    property = 'left';
+                    break;
+                // Ajoutez les autres cas pour le mouvement en fonction de vos besoins
 
-                    default:
-                        break;
-                }
+                default:
+                    break;
+            }
 
-                img.style[property] = startValue;
+            img.style[property] = startValue;
 
-                if (settings.animation.type === 'fixed') {
+            if (settings.animation.type === 'fixed') {
+                setTimeout(function() {
+                    img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
+                    img.style.opacity = '0';
+
                     setTimeout(function() {
-                        img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
-                        img.style.opacity = '0';
+                        img.style.opacity = '1';
 
                         setTimeout(function() {
-                            img.style.opacity = '1';
-
-                            setTimeout(function() {
-                                img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
-                                img.style.opacity = '0';
-
-                                setTimeout(function() {
-                                    img.remove();
-                                    parent.remove();
-                                }, settings.apparition.duration);
-                            }, 0);
-                        }, 0);
-                    }, 3000);
-                } else {
-                    setTimeout(function() {
-                        img.style.transition = `${property} ${settings.apparition.duration / 1000}s linear`;
-                        img.style[property] = '0';
-
-                        setTimeout(function() {
-                            img.style.transition = `${property} ${settings.apparition.duration / 1000}s linear`;
-                            img.style[property] = endValue;
+                            img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
+                            img.style.opacity = '0';
 
                             setTimeout(function() {
                                 img.remove();
@@ -183,14 +123,30 @@ var tireggs = (function() {
                             }, settings.apparition.duration);
                         }, 0);
                     }, 0);
-                }
-            
+                }, 3000);
+            } else {
+                setTimeout(function() {
+                    img.style.transition = `${property} ${settings.apparition.duration / 1000}s linear`;
+                    img.style[property] = '0';
+
+                    setTimeout(function() {
+                        img.style.transition = `${property} ${settings.apparition.duration / 1000}s linear`;
+                        img.style[property] = endValue;
+
+                        setTimeout(function() {
+                            img.remove();
+                            parent.remove();
+                        }, settings.apparition.duration);
+                    }, 0);
+                }, 0);
+            }
+
             if (settings.disparition.concept === 'auto') {
                 setTimeout(function() {
                     if (settings.disparition.type === 'fade') {
                         img.style.transition = `opacity ${settings.disparition.durationtoauto / 1000}s linear`;
                         img.style.opacity = '0';
-            
+
                         setTimeout(function() {
                             img.remove();
                             parent.remove();
@@ -207,12 +163,12 @@ var tireggs = (function() {
                 closeButton.style.top = '0';
                 closeButton.style.right = '0';
                 closeButton.style.cursor = 'pointer';
-            
+
                 closeButton.addEventListener('click', function() {
                     img.remove();
                     parent.remove();
                 });
-            
+
                 parent.appendChild(closeButton);
             }
 
