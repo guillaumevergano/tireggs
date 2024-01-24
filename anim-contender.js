@@ -38,12 +38,22 @@ var contendersAnims = (function () {
 
         var elements = document.querySelectorAll(settings.trigger.selector);
         elements.forEach(function (element) {
-            element.addEventListener(settings.trigger.event, function () {
+            if (settings.trigger.event === 'click') {
+                element.addEventListener('click', function () {
+                    checkAndTriggerAnimation(element);
+                });
+            } else if (settings.trigger.event === 'hover') {
+                element.addEventListener('mouseenter', function () {
+                    checkAndTriggerAnimation(element);
+                });
+            }
+
+            function checkAndTriggerAnimation(element) {
                 var winnerId = parseInt(element.getAttribute('data-idwinner'), 10);
                 if (winnerId === settings.trigger.winner) {
                     triggerAnimation(settings, element);
                 }
-            });
+            }
         });
 
         function triggerAnimation(settings, element) {
