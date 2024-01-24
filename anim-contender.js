@@ -39,14 +39,15 @@ var contendersAnims = (function() {
 
         var elements = document.querySelectorAll(settings.trigger.selector);
         elements.forEach(function(element) {
-            element.addEventListener('click', function() {
+            element.addEventListener(settings.trigger.event, function() {
                 var winnerId = parseInt(element.getAttribute('data-idwinner'), 10);
-                if (winnerId === settings.trigger.winner) {
+
+                if (winnerId == settings.trigger.winner) {
                     triggerAnimation(settings);
                 }
             });
         });
-        
+
         function triggerAnimation(settings) {
             var img = new Image();
             img.src = settings.image.url;
@@ -173,6 +174,7 @@ var contendersAnims = (function() {
             }
 
             document.body.appendChild(parent);
+            alert("Animation déclenchée !");
         }
     };
 })();

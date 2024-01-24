@@ -1283,39 +1283,44 @@ moment.updateLocale( 'fr_FR', {"months":["janvier","f\u00e9vrier","mars","avril"
 <script type="text/javascript" src="https://vainkeurz.com/wp-content/themes/t-vkrz/assets/js/share.js?ver=1704181661" id="share-js"></script>
 <script type="text/javascript" src="https://vainkeurz.com/wp-content/themes/t-vkrz/assets/js/contenders-ajax.js?ver=1704181661" id="contenders-ajax-js"></script>
 <script type="text/javascript" src="https://vainkeurz.com/wp-content/themes/t-vkrz/assets/js/reaction.js?ver=1704230847" id="toplist-reaction-js-js"></script>
-<script type="text/javascript" src="anim-contender.js"></script>
-<script type="text/javascript">
-  document.addEventListener('DOMContentLoaded', function() {
-      window.contendersAnims({
-              'image': {
-                  'url': 'https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/f9a0962dfe5b331bea410429d45db287-1648731760/kaido/do-pixel-art-animated-gif.gif', // URL de l'image
-                  'width': '250px', // Largeur de l'image (soit en px ou %) ou auto
-                  'height': '250px', // Hauteur de l'image (soit en px ou %) ou auto
-                  'background': 'auto' // Cover or contain or auto
-              },
-              'trigger': {
-                  'winner': '153',
-                  'looser': '630'
-              },
-              'position': {
-                  'fullscreen': false, // true or false
-                  'at': 'center center' // Position de l'image par rapport au point 0 0 du body
-              },
-              'apparition': {
-                  'type': 'fade', // Effet d'animation (fade ou none)
-                  'duration': 10500 // Durée de l'animation (en ms)
-              },
-              'animation': {
-                  'type': 'move', // Effet d'animation (move ou fixed)
-                  'direction': 'rightleft', // choix pour la direction rightleft, leftright, bottomtop, topbottom, none(aucun direction pour le type 'fixed')
-              },
-              'disparition': {
-                  'concept': 'none', // none, close (ajoute une croix pour delete), auto (disparition automatique)
-                  'type': 'fade', // Effet d'animation (fade ou none)
-                  'durationtoauto': 1000
-              }
-          });
-      });
+<script src="anim-contender.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        contendersAnims({
+            'image': {
+                'url': 'https://example.com/animation.gif',
+                'width': '250px',
+                'height': '250px',
+                'background': 'auto'
+            },
+            'trigger': {
+                'selector': "contenders_min",
+                'winner': 153,
+                'event': 'click'
+            },
+            'position': {
+                'fullscreen': false,
+                'at': 'center center'
+            },
+            'apparition': {
+                'type': 'none',
+                'duration': 10500
+            },
+            'animation': {
+                'type': 'fixed',
+                'direction': 'none',
+            },
+            'disparition': {
+                'concept': 'none',
+                'type': 'fade',
+                'durationtoauto': 1000
+            }
+        });
+    });
+</script>
+
+<script>
+
     if (!window.location.href.includes('localhost')) {
       let checkUserIsConnected = localStorage.getItem('userConnected');
       const userData = localStorage.getItem("user_info");
