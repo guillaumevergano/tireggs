@@ -1288,13 +1288,13 @@ moment.updateLocale( 'fr_FR', {"months":["janvier","f\u00e9vrier","mars","avril"
     document.addEventListener('DOMContentLoaded', function() {
         contendersAnims({
             'image': {
-                'url': 'https://example.com/animation.gif',
+                'url': 'images/baki.gif',
                 'width': '250px',
                 'height': '250px',
                 'background': 'auto'
             },
             'trigger': {
-                'selector': "contenders_min",
+                'selector': '.contenders_min',
                 'winner': 153,
                 'event': 'click'
             },
@@ -1303,12 +1303,12 @@ moment.updateLocale( 'fr_FR', {"months":["janvier","f\u00e9vrier","mars","avril"
                 'at': 'center center'
             },
             'apparition': {
-                'type': 'none',
-                'duration': 10500
+                'type': 'fade',
+                'duration': 4500
             },
             'animation': {
-                'type': 'fixed',
-                'direction': 'none',
+                'type': 'move',
+                'direction': 'rightleft',
             },
             'disparition': {
                 'concept': 'none',
@@ -1317,10 +1317,6 @@ moment.updateLocale( 'fr_FR', {"months":["janvier","f\u00e9vrier","mars","avril"
             }
         });
     });
-</script>
-
-<script>
-
     if (!window.location.href.includes('localhost')) {
       let checkUserIsConnected = localStorage.getItem('userConnected');
       const userData = localStorage.getItem("user_info");

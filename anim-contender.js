@@ -1,9 +1,8 @@
-var contendersAnims = (function() {
-    // Création de la div parent en dehors de la fonction triggerAnimation
+var contendersAnims = (function () {
     var parent = document.createElement('div');
     document.body.appendChild(parent);
 
-    return function(options) {
+    return function (options) {
         var defaults = {
             image: {
                 url: "https://i.pinimg.com/originals/e5/ed/fe/e5edfe1c50f45d9858e99de0d890606a.gif",
@@ -12,7 +11,7 @@ var contendersAnims = (function() {
                 background: 'cover'
             },
             trigger: {
-                selector: "",
+                selector: ".contenders_min",
                 winner: 0,
                 event: "click",
             },
@@ -38,17 +37,16 @@ var contendersAnims = (function() {
         var settings = Object.assign({}, defaults, options);
 
         var elements = document.querySelectorAll(settings.trigger.selector);
-        elements.forEach(function(element) {
-            element.addEventListener(settings.trigger.event, function() {
+        elements.forEach(function (element) {
+            element.addEventListener(settings.trigger.event, function () {
                 var winnerId = parseInt(element.getAttribute('data-idwinner'), 10);
-
-                if (winnerId == settings.trigger.winner) {
-                    triggerAnimation(settings);
+                if (winnerId === settings.trigger.winner) {
+                    triggerAnimation(settings, element);
                 }
             });
         });
 
-        function triggerAnimation(settings) {
+        function triggerAnimation(settings, element) {
             var img = new Image();
             img.src = settings.image.url;
             img.style.width = settings.image.width;
@@ -82,7 +80,6 @@ var contendersAnims = (function() {
                     img.style.top = `calc(50% - ${settings.image.height} / 2)`;
                     img.style.left = `calc(50% - ${settings.image.width} / 2)`;
                     break;
-                // Ajoutez les autres cas pour le positionnement en fonction de vos besoins
 
                 default:
                     break;
@@ -98,7 +95,6 @@ var contendersAnims = (function() {
                     endValue = '-100%';
                     property = 'left';
                     break;
-                // Ajoutez les autres cas pour le mouvement en fonction de vos besoins
 
                 default:
                     break;
@@ -107,18 +103,18 @@ var contendersAnims = (function() {
             img.style[property] = startValue;
 
             if (settings.animation.type === 'fixed') {
-                setTimeout(function() {
+                setTimeout(function () {
                     img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
                     img.style.opacity = '0';
 
-                    setTimeout(function() {
+                    setTimeout(function () {
                         img.style.opacity = '1';
 
-                        setTimeout(function() {
+                        setTimeout(function () {
                             img.style.transition = `opacity ${settings.apparition.duration / 1000}s linear`;
                             img.style.opacity = '0';
 
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 img.remove();
                                 parent.remove();
                             }, settings.apparition.duration);
@@ -126,15 +122,15 @@ var contendersAnims = (function() {
                     }, 0);
                 }, 3000);
             } else {
-                setTimeout(function() {
+                setTimeout(function () {
                     img.style.transition = `${property} ${settings.apparition.duration / 1000}s linear`;
                     img.style[property] = '0';
 
-                    setTimeout(function() {
+                    setTimeout(function () {
                         img.style.transition = `${property} ${settings.apparition.duration / 1000}s linear`;
                         img.style[property] = endValue;
 
-                        setTimeout(function() {
+                        setTimeout(function () {
                             img.remove();
                             parent.remove();
                         }, settings.apparition.duration);
@@ -143,12 +139,12 @@ var contendersAnims = (function() {
             }
 
             if (settings.disparition.concept === 'auto') {
-                setTimeout(function() {
+                setTimeout(function () {
                     if (settings.disparition.type === 'fade') {
                         img.style.transition = `opacity ${settings.disparition.durationtoauto / 1000}s linear`;
                         img.style.opacity = '0';
 
-                        setTimeout(function() {
+                        setTimeout(function () {
                             img.remove();
                             parent.remove();
                         }, settings.disparition.durationtoauto);
@@ -165,7 +161,7 @@ var contendersAnims = (function() {
                 closeButton.style.right = '0';
                 closeButton.style.cursor = 'pointer';
 
-                closeButton.addEventListener('click', function() {
+                closeButton.addEventListener('click', function () {
                     img.remove();
                     parent.remove();
                 });
@@ -174,7 +170,6 @@ var contendersAnims = (function() {
             }
 
             document.body.appendChild(parent);
-            alert("Animation déclenchée !");
         }
     };
 })();
