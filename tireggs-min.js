@@ -273,7 +273,7 @@ var contendersAnims = (function () {
                 var winnerId = parseInt(element.getAttribute('data-idwinner'), 10);
                 var looserId = parseInt(element.getAttribute('data-idlooser'), 10);
 
-                if (winnerId === settings.trigger.winner && (looserId === settings.trigger.looser || settings.trigger.looser == false)) {
+                if ((winnerId === settings.trigger.winner || settings.trigger.winner == false) && (looserId === settings.trigger.looser || settings.trigger.looser == false)) {
                     triggerAnimation(settings, element);
                 }
                 
