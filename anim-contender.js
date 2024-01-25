@@ -42,15 +42,13 @@ var contendersAnims = (function () {
                 element.addEventListener('click', function () {
                     checkAndTriggerAnimation(element);
                 });
-            } else if (settings.trigger.event === 'hover') {
-                element.addEventListener('mouseenter', function () {
-                    checkAndTriggerAnimation(element);
-                });
             }
 
             function checkAndTriggerAnimation(element) {
                 var winnerId = parseInt(element.getAttribute('data-idwinner'), 10);
-                if (winnerId === settings.trigger.winner) {
+                var looserId = parseInt(element.getAttribute('data-idlooser'), 10);
+
+                if (winnerId === settings.trigger.winner && looserId === settings.trigger.looser) {
                     triggerAnimation(settings, element);
                 }
             }
