@@ -51,6 +51,7 @@ var contendersAnims = (function () {
                 if (winnerId === settings.trigger.winner && (looserId === settings.trigger.looser || settings.trigger.looser == false)) {
                     triggerAnimation(settings, element);
                 }
+                
             }
         });
 
@@ -88,6 +89,24 @@ var contendersAnims = (function () {
                     img.style.top = `calc(50% - ${settings.image.height} / 2)`;
                     img.style.left = `calc(50% - ${settings.image.width} / 2)`;
                     break;
+                case 'center right':
+                    img.style.top = `calc(50% - ${settings.image.height} / 2)`;
+                    img.style.right = '0';
+                    break;
+                case 'center left':
+                    img.style.top = `calc(50% - ${settings.image.height} / 2)`;
+                    img.style.left = '0';
+                    break;
+                case 'right center':
+                    img.style.top = `calc(50% - ${settings.image.height} / 2)`;
+                    img.style.right = '0';
+                    img.style.transform = 'translateY(-50%)';
+                    break;
+                case 'left center':
+                    img.style.top = `calc(50% - ${settings.image.height} / 2)`;
+                    img.style.left = '0';
+                    img.style.transform = 'translateY(-50%)';
+                    break;
 
                 default:
                     break;
@@ -102,6 +121,26 @@ var contendersAnims = (function () {
                     startValue = '100%';
                     endValue = '-100%';
                     property = 'left';
+                    break;
+                case 'leftright':
+                    startValue = '-100%';
+                    endValue = '100%';
+                    property = 'left';
+                    break;
+                case 'bottomtop':
+                    startValue = '100%';
+                    endValue = '-100%';
+                    property = 'top';
+                    break;
+                case 'topbottom':
+                    startValue = '-100%';
+                    endValue = '100%';
+                    property = 'top';
+                    break;
+                case 'none':
+                    startValue = '0';
+                    endValue = '0';
+                    property = 'center';
                     break;
 
                 default:
@@ -181,3 +220,4 @@ var contendersAnims = (function () {
         }
     };
 })();
+
