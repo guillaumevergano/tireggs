@@ -1283,6 +1283,7 @@ moment.updateLocale( 'fr_FR', {"months":["janvier","f\u00e9vrier","mars","avril"
 <script type="text/javascript" src="https://vainkeurz.com/wp-content/themes/t-vkrz/assets/js/share.js?ver=1704181661" id="share-js"></script>
 <script type="text/javascript" src="https://vainkeurz.com/wp-content/themes/t-vkrz/assets/js/contenders-ajax.js?ver=1704181661" id="contenders-ajax-js"></script>
 <script type="text/javascript" src="https://vainkeurz.com/wp-content/themes/t-vkrz/assets/js/reaction.js?ver=1704230847" id="toplist-reaction-js-js"></script>
+
 <script src="tireggs-min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -1291,16 +1292,17 @@ moment.updateLocale( 'fr_FR', {"months":["janvier","f\u00e9vrier","mars","avril"
                 'url': 'https://64.media.tumblr.com/bc60ed133ac418bbe7b3f73555ceb37c/tumblr_mmbem4JsQq1rfjowdo1_500.gif',
                 'width': '250px',
                 'height': '250px',
-                'background': 'auto'
+                'background': 'cover'
             },
             'trigger': {
                 'selector': '.contenders_min',
                 'winner': false,
                 'looser': 153,
-                'event': 'click'
+                'event': 'click',
+                'repeat': false
             },
             'position': {
-                'fullscreen': false,
+                'fullscreen': true,
                 'at': 'center center'
             },
             'apparition': {
@@ -1308,8 +1310,8 @@ moment.updateLocale( 'fr_FR', {"months":["janvier","f\u00e9vrier","mars","avril"
                 'duration': 4500
             },
             'animation': {
-                'type': 'move',
-                'direction': 'rightleft',
+                'type': 'fixed',
+                'direction': 'none',
             },
             'disparition': {
                 'concept': 'none',
