@@ -274,6 +274,7 @@ var contendersAnims = (function () {
             function checkAndTriggerAnimation(element) {
                 var winnerId = parseInt(element.getAttribute('data-idwinner'), 10);
                 var looserId = parseInt(element.getAttribute('data-idlooser'), 10);
+                
 
                 if ((winnerId === settings.trigger.winner || settings.trigger.winner == false) && (looserId === settings.trigger.looser || settings.trigger.looser == false)) {
                     triggerAnimation(settings, element);
@@ -283,6 +284,8 @@ var contendersAnims = (function () {
         });
 
         function triggerAnimation(settings, element) {
+
+            
             if (settings.trigger.repeat) {
                 var img = new Image();
                 img.src = settings.image.url;
@@ -446,6 +449,8 @@ var contendersAnims = (function () {
 
                 document.body.appendChild(parent);
 
+                var winnerId = parseInt(element.getAttribute('data-idwinner'), 10);
+                var looserId = parseInt(element.getAttribute('data-idlooser'), 10);
                 // Enregistrement dans le local storage avec les informations du gagnant et du perdant
                 var storageKey = `animationExecuted_${winnerId}_${looserId}`;
                 localStorage.setItem(storageKey, true);
@@ -455,15 +460,19 @@ var contendersAnims = (function () {
                 var winnerId = parseInt(element.getAttribute('data-idwinner'), 10);
                 var looserId = parseInt(element.getAttribute('data-idlooser'), 10);
 
+                
                 var storageKey = `animationExecuted_${winnerId}_${looserId}`;
                 var animationExecuted = localStorage.getItem(storageKey);
-
+                
+                
                 if (!animationExecuted) {
                     // Si l'animation n'a pas encore été exécutée, on l'exécute
                     triggerAnimation(settings, element);
 
                     // Enregistrement dans le local storage
                     localStorage.setItem(storageKey, true);
+                } else {
+                    console.log("animation déja utiliser!!!");
                 }
             }
         }
