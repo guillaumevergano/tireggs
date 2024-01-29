@@ -224,6 +224,7 @@ var contendersAnims = (function () {
                 // Enregistrement dans le local storage avec les informations du gagnant et du perdant
                 var storageKey = `animationExecuted_${winnerId}_${looserId}`;
                 localStorage.setItem(storageKey, true);
+                console.log(localStorage);
             } else {
                 // Si repeat est false, vérifier dans le local storage
                 var winnerId = parseInt(element.getAttribute('data-idwinner'), 10);
