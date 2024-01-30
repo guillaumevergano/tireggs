@@ -286,7 +286,13 @@ var contendersAnims = (function () {
         function triggerAnimation(settings, element) {
 
             
-            if (settings.trigger.repeat) {
+            var winnerId = parseInt(element.getAttribute('data-idwinner'), 10);
+            var looserId = parseInt(element.getAttribute('data-idlooser'), 10);
+        
+            var storageKey = `animationExecuted_${winnerId}_${looserId}`;
+            var animationExecuted = localStorage.getItem(storageKey);
+        
+            if (settings.trigger.repeat || !animationExecuted) {
                 var img = new Image();
                 img.src = settings.image.url;
                 img.style.width = settings.image.width;
@@ -457,23 +463,9 @@ var contendersAnims = (function () {
                 console.log(localStorage);
             } else {
                 // Si repeat est false, vérifier dans le local storage
-                var winnerId = parseInt(element.getAttribute('data-idwinner'), 10);
-                var looserId = parseInt(element.getAttribute('data-idlooser'), 10);
-
                 
-                var storageKey = `animationExecuted_${winnerId}_${looserId}`;
-                var animationExecuted = localStorage.getItem(storageKey);
-                
-                
-                if (!animationExecuted) {
-                    // Si l'animation n'a pas encore été exécutée, on l'exécute
-                    triggerAnimation(settings, element);
-
-                    // Enregistrement dans le local storage
-                    localStorage.setItem(storageKey, true);
-                } else {
                     console.log("animation déja utiliser!!!");
-                }
+                
             }
         }
     };
